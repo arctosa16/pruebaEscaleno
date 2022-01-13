@@ -11,13 +11,28 @@
     
     <%- include ('partials/navigation.html')%>
 <br><br>
-    <div class="container">
+    <div class="container razas">
         <ul class="list-group">
             <li class="list-group-item active" aria-current="true">Lista de razas y subrazas encontradas en la BD.</li>
-            <li class="list-group-item"><%= Object.keys(data.message) %></li>
-            <li class="list-group-item"></li>
-            <li class="list-group-item"></li>
-            <li class="list-group-item"></li>
+                <% Object.entries(data.message).forEach(function(key,value){ %>
+                    <li class="list-group-item">
+                        <% key.forEach(function(value,index){ %>
+                            <% if (index == 0) { %> 
+                                <%= 'Raza:' %>
+                                <a href="/imgRazas?raza=<%= value %>"> <%= value %> </a>
+                            <% } %>
+
+                            <% if (index == 1 && value != "") { %> 
+                                <i><%= ` Subrazas: ${value}` %> </i>
+                            <% } %>
+
+                            <% if (index > 1 && value != "") { %> 
+                                <i><%= `,${value}` %> </i>
+                            <% } %>
+                        <% }) %>
+  
+                    </li>
+                <% }) %>
           </ul>
     </div>
 
